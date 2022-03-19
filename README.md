@@ -6,7 +6,7 @@
 Simple Flashcards app
 
 ### App Walk-though
-<img src="https://media.giphy.com/media/IqmAwBRMifSl3GUXNY/giphy.gif" width=200><br>
+<img src="https://media.giphy.com/media/khaLdAag2kQASnPKn5/giphy.gif" width=200><br>
 
 ## Required
 - [x] User can open the creation screen
