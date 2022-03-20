@@ -13,6 +13,8 @@ class CreationViewController: UIViewController {
     
     var initialQuestion: String!
     var initialAnswer: String!
+    var initialExtraAnswerOne: String?
+    var initialExtraAnswerTwo: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,8 @@ class CreationViewController: UIViewController {
         // Do any additional setup after loading the view.
         questionTextField.text = initialQuestion
         answerTextField.text = initialAnswer
+        extraOneTextField.text = initialExtraAnswerOne
+        extraTwoTextField.text = initialExtraAnswerTwo
 
     }
     
@@ -34,15 +38,18 @@ class CreationViewController: UIViewController {
     }
     */
     
+    
     @IBAction func didTapOnCancel(_ sender: Any) {
         dismiss(animated: true)
     }
+    
     
     // IBOutlest for the question and answer text fields objects
     @IBOutlet weak var questionTextField: UITextField!
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var extraOneTextField: UITextField!
     @IBOutlet weak var extraTwoTextField: UITextField!
+    
     
     @IBAction func didTapOnDone(_ sender: Any) {
         
@@ -65,8 +72,14 @@ class CreationViewController: UIViewController {
         }
         else{
             
-        // Call the function to update the flashcard
-        flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraOneText, extraAnswerTwo: extraTwoText)
+            // See if it's existing
+            var isExisting = false
+            if initialQuestion != nil {
+                isExisting = true
+            }
+                
+            // Call the function to update the flashcard
+            flashcardsController.updateFlashcard(question: questionText!, answer: answerText!, extraAnswerOne: extraOneText, extraAnswerTwo: extraTwoText, isExisting: isExisting)
         }
         
         // Dismiss
