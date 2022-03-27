@@ -6,7 +6,7 @@
 Simple Flashcards app
 
 ### App Walk-though
-<img src="https://media.giphy.com/media/FZt31KMT4pdL37dIVF/giphy.gif" width=200><br> 
+<img src="https://media.giphy.com/media/PvVb3QTMSU5dKBPFEk/giphy.gif" width=200><br> 
 
 ## Required
 - [x] User can browse through multiple flashcards
