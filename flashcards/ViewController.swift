@@ -108,12 +108,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func didTapOnFlashcard(_ sender: Any) {
-        if frontLabel.isHidden {
-            frontLabel.isHidden = false
-        }
-        else {
-            frontLabel.isHidden = true
-        }
+        flipFlashcard()
     }
     
     
@@ -231,10 +226,12 @@ class ViewController: UIViewController {
         currentIndex = currentIndex + 1
         
         // Update labels
-        updateLabels()
+        // updateLabels()
         
         // Update buttons
         updateNextPrevButtons()
+        
+        animateCardOut()
     }
     
     
@@ -255,6 +252,46 @@ class ViewController: UIViewController {
         else {
             prevButton.isEnabled = true
         }
+    }
+    
+    
+    func flipFlashcard() {
+        
+        
+        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            if self.frontLabel.isHidden {
+                self.frontLabel.isHidden = false
+            }
+            else {
+                self.frontLabel.isHidden = true
+            }
+        })
+    }
+    
+    
+    func animateCardOut() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+        }, completion: { finished in
+            
+            // Update labels
+            self.updateLabels()
+            
+            // Run the animation
+            self.animateCardIn()
+        })
+    }
+    
+    
+    func animateCardIn() {
+        
+        // Start on the right side (don't animate this)
+        card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+        
+        // Animate card going back to its orginal position
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity
+        })
     }
     
     
