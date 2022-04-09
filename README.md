@@ -1,18 +1,21 @@
 ## Flashcards App
 
-## Lab 3 (with optionals completed)
+## Lab 4 (with optionals completed)
 
 ### App Description
 Simple Flashcards app
 
 ### App Walk-though
-<img src="https://media.giphy.com/media/PvVb3QTMSU5dKBPFEk/giphy.gif" width=200><br> 
+<img src="https://media.giphy.com/media/tTL2GFKN5v2qseDbC7/giphy.gif" width=200><br> 
 
 ## Required
-- [x] User can browse through multiple flashcards
-- [x] User can re-open the app and see previously created flashcards
+- [x] User should see the app icon 
+- [x] User should see a splash screen
+- [x] User should see an flip animation when revealing the answer
+- [x] User should see a slide animation when going to the next flashcard
+- [x] User should see a slide animation when going to the previous flashcard
 - [x] Push code to GitHub
 ## Optional
-- [x] User can delete a flashcard
-- [x] User can edit existing flashcard
-- [x] User can store multiple choice questions
+- [x] User should see a nicer flaschard with rounded corners, shadows, and animating when showing the first time
+- [x] User should see all views properly layout when using the app on a phone of different sizes
+- [x] Correct answer in multiple choice should be random
