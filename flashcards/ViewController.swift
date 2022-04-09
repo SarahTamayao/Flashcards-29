@@ -28,6 +28,9 @@ class ViewController: UIViewController {
     // Current flashcard index
     var currentIndex = 0
     
+    // Button to remember what the correct answer is
+    var correctAnswerButton: UIButton!
+    
     @IBOutlet weak var btnOptionOne: UIButton!
     @IBOutlet weak var btnOptionTwo: UIButton!
     @IBOutlet weak var btnOptionThree: UIButton!
@@ -94,9 +97,6 @@ class ViewController: UIViewController {
             self.btnOptionThree.alpha = 1.0
             self.btnOptionThree.transform = CGAffineTransform.identity
         })
-        
-        
-        
     }
 
     
@@ -133,13 +133,32 @@ class ViewController: UIViewController {
     
     // Support multiple choice answer
     @IBAction func didTapOptionOne(_ sender: Any) {
-        btnOptionOne.isHidden = true
+        // If correct answer, flip flashcard else disable button and show front label
+        if btnOptionOne == correctAnswerButton{
+            flipFlashcard()
+        } else {
+            frontLabel.isHidden = false
+            btnOptionOne.isEnabled = false
+        }
     }
     @IBAction func didTapOptionTwo(_ sender: Any) {
-        frontLabel.isHidden = true
+        
+        // If correct answer, flip flashcard else disable button and show front label
+        if btnOptionTwo == correctAnswerButton{
+            flipFlashcard()
+        } else {
+            frontLabel.isHidden = false
+            btnOptionTwo.isEnabled = false
+        }
     }
     @IBAction func didTapOptionThree(_ sender: Any) {
-        btnOptionThree.isHidden = true
+        // If correct answer, flip flashcard else disable button and show front label
+        if btnOptionThree == correctAnswerButton{
+            flipFlashcard()
+        } else {
+            frontLabel.isHidden = false
+            btnOptionThree.isEnabled = false
+        }
     }
     
     
@@ -200,8 +219,24 @@ class ViewController: UIViewController {
         let currentFlashcard = flashcards[currentIndex]
         
         // Update labels
-        backLabel.text = currentFlashcard.answer
         frontLabel.text = currentFlashcard.question
+        backLabel.text = currentFlashcard.answer
+        
+        // Update buttons
+        let buttons = [btnOptionOne, btnOptionTwo, btnOptionThree].shuffled()
+        let answers = [currentFlashcard.answer, currentFlashcard.extraAnswerOne, currentFlashcard.extraAnswerTwo].shuffled()
+        
+        // Iterate over both arrays at the same time
+        for (button, answer) in zip (buttons, answers){
+            
+            // Set tittle of random button with this random answer
+            button?.setTitle(answer, for: .normal)
+            
+            // If this is the correct answer, save the button
+            if answer == currentFlashcard.answer {
+                correctAnswerButton = button
+            }
+        }
     }
     
     
