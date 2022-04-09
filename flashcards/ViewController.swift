@@ -169,7 +169,7 @@ class ViewController: UIViewController {
     
     func updateFlashcard(question: String, answer: String, extraAnswerOne: String?, extraAnswerTwo: String?, isExisting: Bool) {
         
-        let flashcard = Flashcard(question: question, answer: answer, extraAnswerOne: extraAnswerOne, extraAnswerTwo: extraAnswerOne)
+        let flashcard = Flashcard(question: question, answer: answer, extraAnswerOne: extraAnswerOne, extraAnswerTwo: extraAnswerTwo)
         
         
         btnOptionOne.setTitle(flashcard.extraAnswerOne, for: .normal)
@@ -283,11 +283,11 @@ class ViewController: UIViewController {
         // Update current index
         currentIndex = currentIndex - 1
         
-        // Update labels
-        updateLabels()
-        
         // Update buttons
         updateNextPrevButtons()
+        
+        // Animate card out taking it to x = 300.0
+        animateCardOut(xval: 300.0)
     }
     
     
@@ -296,13 +296,11 @@ class ViewController: UIViewController {
         // Update current index
         currentIndex = currentIndex + 1
         
-        // Update labels
-        // updateLabels()
-        
         // Update buttons
         updateNextPrevButtons()
         
-        animateCardOut()
+        // Animate card out taking it to x = -300.0
+        animateCardOut(xval: -300.0)
     }
     
     
@@ -338,24 +336,24 @@ class ViewController: UIViewController {
     }
     
     
-    func animateCardOut() {
+    func animateCardOut(xval: Float) {
         UIView.animate(withDuration: 0.3, animations: {
-            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: CGFloat(xval), y: 0.0)
         }, completion: { finished in
             
             // Update labels
             self.updateLabels()
             
             // Run the animation
-            self.animateCardIn()
+            self.animateCardIn(xval: -xval)
         })
     }
     
     
-    func animateCardIn() {
+    func animateCardIn(xval: Float) {
         
-        // Start on the right side (don't animate this)
-        card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+        // Start on the (x = xval) side (don't animate this)
+        card.transform = CGAffineTransform.identity.translatedBy(x: CGFloat(xval), y: 0.0)
         
         // Animate card going back to its orginal position
         UIView.animate(withDuration: 0.3, animations: {
